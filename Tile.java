@@ -5,7 +5,6 @@ public class Tile {
     private int[] position;
 
     public Tile() {
-        super();
         this.value = 0;
     }
 
@@ -30,25 +29,21 @@ public class Tile {
         this.position = position;
     }
 
-    public void moveTo(int[] position) {
-
+    public boolean hasMoved(int row, int col) {
+        return (row != position[0] || col != position[1]);
     }
 
-    public void mergeTiles(Tile otherTile) {
-
+    public String toString() {
+        int row = position[0];
+        int col = position[1];
+        String output = "Tile is: " + this.value + "\n";
+        output += "Position: [" + row + ", " + col + "]";
+        return output;
     }
-
-    public boolean isZero() {
-        return this.value == 0;
-    }
-
-
-
-    public String toString(){return "Tile is: " + this.value;}
 
     public static void main(String[] args) {
-        Tile tile = new Tile();
-        System.out.println(tile.getPosition());
+        Tile tile = new Tile(4, new int[] {2, 3});
+        System.out.println(tile);
     }
 
 }
