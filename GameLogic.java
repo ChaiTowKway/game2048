@@ -34,10 +34,10 @@ public class GameLogic {
 
 //generate a random tile with value 2 or 4 (80% : 20%) at an zero position
     public void  generateRandomTile() {
-        isGameOver();
-        if (!boardStatusChanged) {
+        if (isGameOver() || !boardStatusChanged) {
             return;
         }
+
         int value = 0;
         if (Math.random() < 0.8) {
             value = 2;
@@ -243,7 +243,7 @@ public class GameLogic {
         generateRandomTile();
     }
 
-    public boolean getTile2048() {
+    public boolean isWinWith2048() {
         return winWith2048;
     }
 
@@ -251,14 +251,12 @@ public class GameLogic {
         return this.numOfZeroTiles == 0;
     }
 
-    public void isGameOver() {
-        if (isBoardFull() || getTile2048()) {
+    public boolean isGameOver() {
+        if (isBoardFull() || isWinWith2048()) {
             gameOver = true;
         }
-        if (gameOver) {
-            System.out.println("No more empty slot. Game Over");
-            System.exit(0);
-        }
+
+        return gameOver;
     }
 
     public int getTotalScore() {
