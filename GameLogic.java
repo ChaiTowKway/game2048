@@ -265,6 +265,10 @@ public class GameLogic {
         return this.totalScore;
     }
 
+    public Tile getTile(int row, int col) {
+        return board[row][col];
+    }
+
     public String toString() {
         Formatter boardPattern = new Formatter();
         boardPattern.format("---------------------\n");
