@@ -1,4 +1,3 @@
-package finalProject;
 
 import java.util.ArrayList;
 import java.util.Formatter;
@@ -30,6 +29,7 @@ public class GameLogic {
             generateRandomTile();
 
         }
+        GameTrigger.USER_ACTION.invokeKey();
     }
 
     //generate a random tile with value 2 or 4 (80% : 20%) at an zero position
