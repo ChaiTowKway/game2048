@@ -32,7 +32,7 @@ public class GameLogic {
         }
     }
 
-//generate a random tile with value 2 or 4 (80% : 20%) at an zero position
+    //generate a random tile with value 2 or 4 (80% : 20%) at an zero position
     public void  generateRandomTile() {
         if (isGameOver() || !boardStatusChanged) {
             return;
@@ -243,6 +243,23 @@ public class GameLogic {
         generateRandomTile();
     }
 
+    public boolean canStillMerge() {
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size - 1; j++) {
+
+                if ((board[i][j] != null && board[i][j + 1] != null)
+                        && board[i][j].getValue() == board[i][j + 1].getValue()) {
+                    return true;
+                }
+                if ((board[j][i] != null && board[j + 1][i] != null)
+                        && board[j][i].getValue() == board[j + 1][i].getValue()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public boolean isWinWith2048() {
         return winWith2048;
     }
@@ -252,10 +269,9 @@ public class GameLogic {
     }
 
     public boolean isGameOver() {
-        if (isBoardFull() || isWinWith2048()) {
+        if ((isBoardFull() && !canStillMerge())|| isWinWith2048()) {
             gameOver = true;
         }
-
         return gameOver;
     }
 
