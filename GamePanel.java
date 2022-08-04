@@ -1,6 +1,7 @@
 import javax.swing.*;
 import javax.swing.colorchooser.ColorSelectionModel;
 import java.awt.*;
+import java.util.HashMap;
 
 public class GamePanel extends JPanel {
     private static final int TILE_ARC = 15;
@@ -27,12 +28,12 @@ public class GamePanel extends JPanel {
 
     private void setLogo(Graphics graph) {
         graph.setFont( new Font(FONT, Font.BOLD, 38) );
-        graph.setColor( Color.YELLOW );
+        graph.setColor( new Color (0X776E65));
         graph.drawString("Fun2048!", BOARD_MARGIN, 50);
     }
 
     private void paintBackground(Graphics graph){
-        graph.setColor(Color.BLUE);
+        graph.setColor(new Color (0XFAF8EF));
         graph.fillRect(0,0, GameTrigger.GAME_WINDOW.getWidth(), GameTrigger.GAME_WINDOW.getHeight());
     }
     private void showScoreBoard(Graphics graph){
@@ -43,15 +44,14 @@ public class GamePanel extends JPanel {
         int y = 10;
 
         //draw score board
-        graph.setColor(Color.white);
+        graph.setColor(new Color (0X776E65));
         graph.fillOval(x, y, widthOfScoreBoard, heightOfScoreBoard);
         graph.setFont( new Font(FONT, Font.BOLD, 15) );
-        graph.setColor(Color.RED);
+        graph.setColor(new Color(0XFFFFFF));
         graph.drawString("SCORE: ", x + 20, y + 35);
 
         //display current score to the score board
         graph.setFont( new Font(FONT, Font.BOLD, 18) );
-        graph.setColor(Color.magenta);
         String score = String.valueOf(GameTrigger.GAME_LOGIC.getTotalScore());
         graph.drawString(score, x + 40, y + 55);
 
@@ -64,8 +64,8 @@ public class GamePanel extends JPanel {
         graph.translate(BOARD_MARGIN, 100); //place the left-top of game board and all tiles at this coordination
         int widthOfBoard = GameTrigger.GAME_WINDOW.getWidth() - 2 * BOARD_MARGIN;
         int heightOfBoard = TILE_SIZE * 4  + (4 + 1) * TILE_MARGIN;
+        graph.setColor(new Color (0XBBADA0));
         graph.fillRect(0,0, widthOfBoard, heightOfBoard );
-        graph.setColor(Color.RED);
 
         //lay out 4*4 tiles on the game board
         for (int row = 0; row < 4; row++) {
@@ -76,18 +76,18 @@ public class GamePanel extends JPanel {
     }
 
     private static void drawTile(Graphics graph, Tile tile, int x, int y) {
+        int value = 0;
+        if (tile != null){
+            value = tile.getValue();}
+
         //draw each tile(without value)
         int xOffset = x * (TILE_MARGIN + TILE_SIZE) + TILE_MARGIN;
         int yOffset = y * (TILE_MARGIN + TILE_SIZE) + TILE_MARGIN;
-        graph.setColor(Color.GRAY);
+        graph.setColor(getTileColor(value));
         graph.fillRoundRect(xOffset, yOffset, TILE_SIZE, TILE_SIZE, TILE_ARC, TILE_ARC);
 
         //display value of each tile
-        int value = 0;
-        if (tile != null){
-        value = tile.getValue();}
-
-        graph.setColor(Color.orange);
+        graph.setColor(new Color (0X776E65));
         final Font font = new Font(FONT, Font.BOLD, 40);
         graph.setFont(font);
 
@@ -102,9 +102,9 @@ public class GamePanel extends JPanel {
 
         //if game is over, display 'win' or 'lost' to the window
         if (GameTrigger.GAME_LOGIC.isGameOver()) {
-            graph.setColor(Color.BLACK);
+            graph.setColor(new Color(255, 255, 255, 40));
             graph.fillRect(0, 0, GameTrigger.GAME_WINDOW.getWidth(), GameTrigger.GAME_WINDOW.getWidth());
-            graph.setColor(Color.white);
+            graph.setColor(new Color (0X776E65));
             graph.setFont(new Font(FONT, Font.BOLD, 40));
             if(GameTrigger.GAME_LOGIC.isWinWith2048()){
             graph.drawString("Congrats!You WIN!", 2 * BOARD_MARGIN, 100 + BOARD_MARGIN);}
@@ -114,5 +114,24 @@ public class GamePanel extends JPanel {
             }
 
         }
+
+
+    public static Color getTileColor(int value) {
+        HashMap<Integer, Color> tileColor = new HashMap<>();
+        tileColor.put(0,		new Color (238, 228, 218, 90));
+        tileColor.put(2,		new Color (0XEEE4DA));
+        tileColor.put(4,		new Color (0XEDE0C8));
+        tileColor.put(8,		new Color (0XF2B179));
+        tileColor.put(16,		new Color (0XF59563));
+        tileColor.put(32,		new Color (0XF67C5F));
+        tileColor.put(64,		new Color (0XF65E3B));
+        tileColor.put(128,		new Color (0XEDCF72));
+        tileColor.put(256,		new Color (0XEDCC61));
+        tileColor.put(512,		new Color (0XEDC850));
+        tileColor.put(1024, 	new Color (0XEDC53F));
+        tileColor.put(2048, 	new Color (0XEDC22E));
+        return tileColor.get(value);
+    }
+
     }
 
