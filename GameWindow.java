@@ -1,5 +1,9 @@
 /**
+ * CS5004 Summer 2022 Final Project - GAME 2048
  * This is the View class which display results to user
+ * @author Qian Lang; Xiaodong Li
+ * @version 0.0
+ * 09 Aug 2022
  */
 
 import javax.swing.*;

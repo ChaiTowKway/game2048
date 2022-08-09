@@ -1,6 +1,10 @@
 /**
+ * CS5004 Summer 2022 Final Project - GAME 2048
  * Controller class to bind GameWindow class and GameLogic class
  * Takes user inputs(key type), tells model what to do and view what to display
+ * @author Qian Lang; Xiaodong Li
+ * @version 0.0
+ * 09 Aug 2022
  */
 
 import java.awt.event.KeyEvent;
