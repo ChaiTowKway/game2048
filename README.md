@@ -1,3 +1,3 @@
 # game2048
-An interactive game using JAVA Swing GUI for users to play with keyboard control
+An interactive game using JAVA Swing GUI for users to play with keyboard control \n
 The game is designed with Model-View-Controller (MVC) framework
