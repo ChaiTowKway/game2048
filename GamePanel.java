@@ -1,3 +1,8 @@
+/**
+ * This class elaborates on the view
+ * This class is a panel which draw the background, logo, scoreboard, and the gameboard
+ */
+
 import javax.swing.*;
 import javax.swing.colorchooser.ColorSelectionModel;
 import java.awt.*;
@@ -23,24 +28,35 @@ public class GamePanel extends JPanel {
         showScoreBoard(graph);
         drawGameBoard(graph);
         graph.dispose(); // free memory
-
     }
 
+    /**
+     * draw logo
+     * @param graph context in which to paint
+     */
     private void setLogo(Graphics graph) {
         graph.setFont( new Font(FONT, Font.BOLD, 38) );
         graph.setColor( new Color (0X776E65));
         graph.drawString("Fun2048!", BOARD_MARGIN, 50);
     }
 
+    /**
+     * draw background
+     * @param graph context in which to paint
+     */
     private void paintBackground(Graphics graph){
         graph.setColor(new Color (0XFAF8EF));
         graph.fillRect(0,0, GameTrigger.GAME_WINDOW.getWidth(), GameTrigger.GAME_WINDOW.getHeight());
     }
+
+    /**
+     * draw score board
+     * @param graph context in which to paint
+     */
     private void showScoreBoard(Graphics graph){
         int widthOfScoreBoard = 100;
         int heightOfScoreBoard = 80;
         int x = GameTrigger.GAME_WINDOW.getWidth() - BOARD_MARGIN - widthOfScoreBoard;
-//        int x = GameTrigger.GAME_WINDOW.getWidth() * (2/3);
         int y = 10;
 
         //draw score board
@@ -58,7 +74,10 @@ public class GamePanel extends JPanel {
 
     }
 
-
+    /**
+     * draw gameboard
+     * @param graph context in which to paint
+     */
     private static void drawGameBoard(Graphics graph){
         //set the game board
         graph.translate(BOARD_MARGIN, 100); //place the left-top of game board and all tiles at this coordination
@@ -75,6 +94,13 @@ public class GamePanel extends JPanel {
         }
     }
 
+    /**
+     * draw each tile on the game board
+     * @param graph context in which to paint
+     * @param tile the tile at position(row, col)
+     * @param x x coordinate of tile
+     * @param y y coordinate of tile
+     */
     private static void drawTile(Graphics graph, Tile tile, int x, int y) {
         int value = 0;
         if (tile != null){
@@ -86,11 +112,10 @@ public class GamePanel extends JPanel {
         graph.setColor(getTileColor(value));
         graph.fillRoundRect(xOffset, yOffset, TILE_SIZE, TILE_SIZE, TILE_ARC, TILE_ARC);
 
-        //display value of each tile
+        //display value of each tile at the center of each tile
         graph.setColor(new Color (0X776E65));
         final Font font = new Font(FONT, Font.BOLD, 40);
         graph.setFont(font);
-
 
         final FontMetrics fm = graph.getFontMetrics(font);
         String s = String.valueOf(value);
@@ -115,7 +140,11 @@ public class GamePanel extends JPanel {
 
         }
 
-
+    /**
+     * get the color of tile based on the value of the tile
+     * @param value the value of tile
+     * @return the color of the tile
+     */
     public static Color getTileColor(int value) {
         HashMap<Integer, Color> tileColor = new HashMap<>();
         tileColor.put(0,		new Color (238, 228, 218, 90));

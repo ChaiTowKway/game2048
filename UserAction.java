@@ -1,11 +1,22 @@
+/**
+ * Controller class to bind GameWindow class and GameLogic class
+ * Takes user inputs(key type), tells model what to do and view what to display
+ */
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class UserAction implements KeyListener {
 
     @Override
-    public void keyTyped(KeyEvent e) {}
-    public void keyReleased(KeyEvent e) {}
+    public void keyTyped(KeyEvent e) {} // invoke when key is typed, output KeyChar -> e.getKeyChar()
+    public void keyReleased(KeyEvent e) {} //called whenever the key is released
+
+    /**
+     * invoke the shiftUp()/shiftDown()/shiftTowardsLeft()/shiftTowardsRight() in GameLogic class based on the KeyCode of
+     * key user pressed down (up/down/left/right)
+     * @param e the event to be processed
+     */
     public void keyPressed(KeyEvent e) {
         int keyVal = e.getKeyCode();
 
@@ -26,15 +37,19 @@ public class UserAction implements KeyListener {
                 break;
         }
 
-        GameTrigger.GAME_LOGIC.isGameOver();
         GameTrigger.GAME_WINDOW.repaint(); //will call on paint method with param Graphics
-
     }
 
+    /**
+     * to add KeyListener
+     */
     public void invokeKey() {
         GameTrigger.GAME_WINDOW.addKeyListener(this);
     }
 
+    /**
+     * to remove KeyListener
+     */
     public void closeKey() {
         GameTrigger.GAME_WINDOW.removeKeyListener(this);
     }
